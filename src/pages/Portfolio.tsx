@@ -206,10 +206,10 @@ export default function Portfolio() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-6">
-            Quer um Projeto Como Esses?
+            Quer trabalhos como esses?
           </h2>
           <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-            Entre em contato e transforme seu projeto em realidade com qualidade e profissionalismo
+            Entre em contato e transforme seu projeto em realidade com qualidade e profissionalismo.
           </p>
           <a
             href="https://wa.me/5547989100709?text=Olá,%20vi%20o%20portfólio%20e%20gostaria%20de%20um%20orçamento"
