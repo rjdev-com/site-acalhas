@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { Phone, Mail, MapPin, Send, CheckCircle, Instagram, Facebook } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { usePageContent } from '../hooks/usePageContent';
 
 export default function Contato() {
+  const { getContent } = usePageContent('contato');
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -63,14 +65,19 @@ export default function Contato() {
     });
   };
 
+  const phone = getContent('phone');
+  const email = getContent('email');
+  const instagramUrl = getContent('instagram_url');
+  const facebookUrl = getContent('facebook_url');
+
   return (
     <div>
       <section className="bg-gradient-to-br from-[#1e3a5f] to-[#2d4d70] text-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Entre em Contato</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">{getContent('hero_title')}</h1>
             <p className="text-xl text-gray-300 leading-relaxed">
-              Estamos prontos para atender você. Solicite um orçamento sem compromisso
+              {getContent('hero_subtitle')}
             </p>
           </div>
         </div>
@@ -81,16 +88,15 @@ export default function Contato() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl font-bold text-[#1e3a5f] mb-6">
-                Informações de Contato
+                {getContent('info_title')}
               </h2>
               <p className="text-gray-700 mb-8 leading-relaxed text-lg">
-                Entre em contato conosco através dos canais abaixo ou preencha o formulário.
-                Responderemos o mais breve possível.
+                {getContent('info_subtitle')}
               </p>
 
               <div className="space-y-6">
                 <a
-                  href="https://wa.me/5547989100709"
+                  href={`https://wa.me/55${phone.replace(/\D/g, '')}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors group"
@@ -100,13 +106,13 @@ export default function Contato() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-[#1e3a5f] mb-1">WhatsApp</h3>
-                    <p className="text-gray-600">(47) 98910-0709</p>
+                    <p className="text-gray-600">{phone}</p>
                     <p className="text-sm text-[#ff6b35] mt-1">Clique para falar conosco</p>
                   </div>
                 </a>
 
                 <a
-                  href="mailto:contato@acalhas.com.br"
+                  href={`mailto:${email}`}
                   className="flex items-start space-x-4 p-6 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors group"
                 >
                   <div className="flex-shrink-0 w-12 h-12 bg-[#ff6b35] text-white rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -114,7 +120,7 @@ export default function Contato() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-[#1e3a5f] mb-1">E-mail</h3>
-                    <p className="text-gray-600">contato@acalhas.com.br</p>
+                    <p className="text-gray-600">{email}</p>
                   </div>
                 </a>
 
@@ -123,18 +129,18 @@ export default function Contato() {
                     <MapPin size={24} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-[#1e3a5f] mb-1">Localização</h3>
-                    <p className="text-gray-600">Joinville - SC</p>
-                    <p className="text-sm text-gray-500 mt-1">Atendemos Joinville e região</p>
+                    <h3 className="font-semibold text-[#1e3a5f] mb-1">{getContent('address_title')}</h3>
+                    <p className="text-gray-600">{getContent('address')}</p>
+                    <p className="text-sm text-gray-500 mt-1">{getContent('address_subtitle')}</p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-8">
-                <h3 className="font-semibold text-[#1e3a5f] mb-4 text-lg">Siga-nos nas Redes Sociais</h3>
+                <h3 className="font-semibold text-[#1e3a5f] mb-4 text-lg">{getContent('social_title')}</h3>
                 <div className="flex space-x-4">
                   <a
-                    href="https://instagram.com/acalhasof"
+                    href={instagramUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all"
@@ -143,7 +149,7 @@ export default function Contato() {
                     <span className="font-semibold">Instagram</span>
                   </a>
                   <a
-                    href="https://facebook.com/acalhasof"
+                    href={facebookUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center space-x-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-all"
@@ -158,7 +164,7 @@ export default function Contato() {
             <div>
               <div className="bg-gray-50 rounded-2xl p-8 shadow-lg">
                 <h2 className="text-2xl font-bold text-[#1e3a5f] mb-6">
-                  Solicite seu Orçamento
+                  {getContent('form_title')}
                 </h2>
 
                 {success && (
@@ -301,19 +307,19 @@ export default function Contato() {
       <section className="py-16 bg-[#1e3a5f] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Prefere Falar Diretamente?
+            {getContent('whatsapp_cta_title')}
           </h2>
           <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            Entre em contato via WhatsApp para um atendimento rápido e personalizado
+            {getContent('whatsapp_cta_subtitle')}
           </p>
           <a
-            href="https://wa.me/5547989100709?text=Olá,%20gostaria%20de%20solicitar%20um%20orçamento"
+            href={`https://wa.me/55${phone.replace(/\D/g, '')}?text=Olá,%20gostaria%20de%20solicitar%20um%20orçamento`}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center bg-green-500 hover:bg-green-600 text-white px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105 shadow-lg"
           >
             <Phone className="mr-2" size={20} />
-            WhatsApp: (47) 98910-0709
+            WhatsApp: {phone}
           </a>
         </div>
       </section>

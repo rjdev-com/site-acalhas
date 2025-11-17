@@ -1,38 +1,25 @@
 import { Award, CheckCircle, Clock, Users, Wrench, MapPin } from 'lucide-react';
+import { usePageContent } from '../hooks/usePageContent';
 
 export default function Sobre() {
+  const { getContent } = usePageContent('sobre');
+
   const values = [
-    {
-      icon: Award,
-      title: 'Qualidade',
-      description: 'Utilizamos apenas alumínio de primeira linha em todas as nossas fabricações',
-    },
-    {
-      icon: Clock,
-      title: 'Pontualidade',
-      description: 'Cumprimos os prazos estabelecidos com responsabilidade e profissionalismo',
-    },
-    {
-      icon: Users,
-      title: 'Atendimento',
-      description: 'Atendimento personalizado do orçamento à finalização do projeto',
-    },
-    {
-      icon: Wrench,
-      title: 'Expertise',
-      description: 'Equipe experiente e qualificada em fabricação e instalação',
-    },
+    { icon: Award, titleKey: 'value1_title', descriptionKey: 'value1_description' },
+    { icon: Clock, titleKey: 'value2_title', descriptionKey: 'value2_description' },
+    { icon: Users, titleKey: 'value3_title', descriptionKey: 'value3_description' },
+    { icon: Wrench, titleKey: 'value4_title', descriptionKey: 'value4_description' },
   ];
 
-  const benefits = [
-    'Fabricação própria com controle total de qualidade',
-    'Alumínio em duas espessuras: 0,5mm e 0,7mm',
-    'Projetos personalizados conforme suas necessidades',
-    'Instalação profissional e segura',
-    'Atendimento em Joinville e região',
-    'Orçamento sem compromisso',
-    'Garantia dos serviços prestados',
-    'Acompanhamento durante todo o projeto',
+  const benefitKeys = [
+    'benefit1', 'benefit2', 'benefit3', 'benefit4',
+    'benefit5', 'benefit6', 'benefit7', 'benefit8'
+  ];
+
+  const highlights = [
+    { icon: Wrench, titleKey: 'highlight1_title', descriptionKey: 'highlight1_description' },
+    { icon: Award, titleKey: 'highlight2_title', descriptionKey: 'highlight2_description' },
+    { icon: MapPin, titleKey: 'highlight3_title', descriptionKey: 'highlight3_description' },
   ];
 
   return (
@@ -40,9 +27,9 @@ export default function Sobre() {
       <section className="bg-gradient-to-br from-[#1e3a5f] to-[#2d4d70] text-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Sobre a A Calhas</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">{getContent('hero_title')}</h1>
             <p className="text-xl text-gray-300 leading-relaxed">
-              Especialistas em fabricação e instalação de calhas, rufos e produtos em alumínio em Joinville - SC
+              {getContent('hero_subtitle')}
             </p>
           </div>
         </div>
@@ -53,35 +40,23 @@ export default function Sobre() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-6">
-                Compromisso com a Excelência
+                {getContent('main_title')}
               </h2>
               <div className="space-y-4 text-gray-700 leading-relaxed text-lg">
-                <p>
-                  A A Calhas é uma empresa especializada em fabricação e instalação de calhas, rufos,
-                  pingadeiras e produtos em alumínio, atuando em Joinville e região com foco na qualidade
-                  e satisfação dos clientes.
-                </p>
-                <p>
-                  Nossa experiência no mercado nos permite oferecer soluções personalizadas para projetos
-                  residenciais, comerciais e industriais, sempre utilizando materiais de primeira qualidade
-                  e técnicas de instalação profissionais.
-                </p>
-                <p>
-                  Trabalhamos com alumínio em duas espessuras (0,5mm e 0,7mm) para atender diferentes
-                  necessidades e orçamentos, garantindo sempre a melhor relação custo-benefício para
-                  nossos clientes.
-                </p>
+                <p>{getContent('main_text1')}</p>
+                <p>{getContent('main_text2')}</p>
+                <p>{getContent('main_text3')}</p>
               </div>
             </div>
             <div className="relative">
               <img
-                src="https://images.pexels.com/photos/1249611/pexels-photo-1249611.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src={getContent('main_image')}
                 alt="Profissional trabalhando"
                 className="rounded-2xl shadow-2xl"
               />
               <div className="absolute -bottom-6 -left-6 bg-[#ff6b35] text-white p-6 rounded-xl shadow-xl">
-                <p className="text-3xl font-bold">100%</p>
-                <p className="text-sm">Compromisso com Qualidade</p>
+                <p className="text-3xl font-bold">{getContent('main_stat_number')}</p>
+                <p className="text-sm">{getContent('main_stat_text')}</p>
               </div>
             </div>
           </div>
@@ -92,10 +67,10 @@ export default function Sobre() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-4">
-              Nossos Valores
+              {getContent('values_title')}
             </h2>
             <p className="text-xl text-gray-600">
-              Princípios que guiam nosso trabalho diariamente
+              {getContent('values_subtitle')}
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -107,8 +82,8 @@ export default function Sobre() {
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-[#ff6b35] text-white rounded-full mb-4">
                   <value.icon size={32} />
                 </div>
-                <h3 className="text-xl font-bold text-[#1e3a5f] mb-3">{value.title}</h3>
-                <p className="text-gray-600 leading-relaxed">{value.description}</p>
+                <h3 className="text-xl font-bold text-[#1e3a5f] mb-3">{getContent(value.titleKey)}</h3>
+                <p className="text-gray-600 leading-relaxed">{getContent(value.descriptionKey)}</p>
               </div>
             ))}
           </div>
@@ -120,20 +95,20 @@ export default function Sobre() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <img
-                src="https://images.pexels.com/photos/259984/pexels-photo-259984.jpeg?auto=compress&cs=tinysrgb&w=800"
+                src={getContent('benefits_image')}
                 alt="Alumínio de qualidade"
                 className="rounded-2xl shadow-2xl"
               />
             </div>
             <div className="order-1 lg:order-2">
               <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-6">
-                Por Que Escolher a A Calhas?
+                {getContent('benefits_title')}
               </h2>
               <ul className="space-y-4">
-                {benefits.map((benefit, index) => (
+                {benefitKeys.map((benefitKey, index) => (
                   <li key={index} className="flex items-start">
                     <CheckCircle size={24} className="text-[#ff6b35] mr-3 flex-shrink-0 mt-0.5" />
-                    <span className="text-gray-700 text-lg">{benefit}</span>
+                    <span className="text-gray-700 text-lg">{getContent(benefitKey)}</span>
                   </li>
                 ))}
               </ul>
@@ -145,33 +120,17 @@ export default function Sobre() {
       <section className="py-16 bg-[#1e3a5f] text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="bg-[#2d4d70] rounded-xl p-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#ff6b35] rounded-full mb-4">
-                <Wrench size={32} />
+            {highlights.map((highlight, index) => (
+              <div key={index} className="bg-[#2d4d70] rounded-xl p-8">
+                <div className="inline-flex items-center justify-center w-16 h-16 bg-[#ff6b35] rounded-full mb-4">
+                  <highlight.icon size={32} />
+                </div>
+                <h3 className="text-2xl font-bold mb-2">{getContent(highlight.titleKey)}</h3>
+                <p className="text-gray-300 leading-relaxed">
+                  {getContent(highlight.descriptionKey)}
+                </p>
               </div>
-              <h3 className="text-2xl font-bold mb-2">Fabricação Própria</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Controle total sobre qualidade e prazos de entrega
-              </p>
-            </div>
-            <div className="bg-[#2d4d70] rounded-xl p-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#ff6b35] rounded-full mb-4">
-                <Award size={32} />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">Alumínio Premium</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Material de primeira qualidade em 0,5mm e 0,7mm
-              </p>
-            </div>
-            <div className="bg-[#2d4d70] rounded-xl p-8">
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-[#ff6b35] rounded-full mb-4">
-                <MapPin size={32} />
-              </div>
-              <h3 className="text-2xl font-bold mb-2">Atendimento Local</h3>
-              <p className="text-gray-300 leading-relaxed">
-                Presente em Joinville e toda a região
-              </p>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -179,10 +138,10 @@ export default function Sobre() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-6">
-            Vamos Trabalhar Juntos?
+            {getContent('cta_title')}
           </h2>
           <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-            Entre em contato e descubra como podemos transformar seu projeto em realidade
+            {getContent('cta_subtitle')}
           </p>
           <a
             href="https://wa.me/5547989100709?text=Olá,%20gostaria%20de%20conhecer%20melhor%20os%20serviços%20da%20A%20Calhas"
