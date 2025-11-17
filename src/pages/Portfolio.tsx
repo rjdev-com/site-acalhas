@@ -2,10 +2,12 @@ import { useState, useEffect } from 'react';
 import { X, MapPin, Layers } from 'lucide-react';
 import { supabase } from '../lib/supabase';
 import type { Database } from '../lib/database.types';
+import { usePageContent } from '../hooks/usePageContent';
 
 type Project = Database['public']['Tables']['projects']['Row'];
 
 export default function Portfolio() {
+  const { get, loading: contentLoading } = usePageContent('portfolio');
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('todos');
@@ -57,9 +59,11 @@ export default function Portfolio() {
       <section className="bg-gradient-to-br from-[#1e3a5f] to-[#2d4d70] text-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Portfólio</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              {get('hero_title', 'Portfólio')}
+            </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
-              Confira nossos trabalhos realizados em Joinville e região. Qualidade e acabamento profissional em cada projeto.
+              {get('hero_subtitle', 'Confira nossos trabalhos realizados em Joinville e região. Qualidade e acabamento profissional em cada projeto.')}
             </p>
           </div>
         </div>
@@ -206,10 +210,10 @@ export default function Portfolio() {
       <section className="py-16 bg-gray-50">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1e3a5f] mb-6">
-            Quer trabalhos como esses?
+            {get('cta_title', 'Quer trabalhos como esses?')}
           </h2>
           <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-            Entre em contato e transforme seu projeto em realidade com qualidade e profissionalismo.
+            {get('cta_subtitle', 'Entre em contato e transforme seu projeto em realidade com qualidade e profissionalismo.')}
           </p>
           <a
             href="https://wa.me/5547989100709?text=Olá,%20vi%20o%20portfólio%20e%20gostaria%20de%20um%20orçamento"

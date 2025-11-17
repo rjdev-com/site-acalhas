@@ -1,10 +1,13 @@
 import { ArrowRight, Shield, Clock, Award, Wrench, Home, Building2, ChevronRight } from 'lucide-react';
+import { usePageContent } from '../hooks/usePageContent';
 
 interface InicioProps {
   onNavigate: (page: string) => void;
 }
 
 export default function Inicio({ onNavigate }: InicioProps) {
+  const { get } = usePageContent('inicio');
+
   const services = [
     {
       icon: Home,
@@ -58,10 +61,10 @@ export default function Inicio({ onNavigate }: InicioProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              Calhas de Alumínio de Alta Qualidade em <span className="text-[#ff6b35]">Joinville</span>
+              {get('hero_title', 'Calhas de Alumínio de Alta Qualidade em')} <span className="text-[#ff6b35]">Joinville</span>
             </h1>
             <p className="text-xl md:text-2xl mb-8 text-gray-300 leading-relaxed">
-              Fabricação e instalação profissional de calhas, rufos e produtos em alumínio 0,5mm e 0,7mm
+              {get('hero_subtitle', 'Fabricação e instalação profissional de calhas, rufos e produtos em alumínio 0,5mm e 0,7mm')}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

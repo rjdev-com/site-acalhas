@@ -1,11 +1,11 @@
-import { LayoutDashboard, FolderOpen, LogOut, Menu, X } from 'lucide-react';
+import { LayoutDashboard, FolderOpen, FileText, LogOut, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 
 interface AdminLayoutProps {
   children: React.ReactNode;
-  currentPage: 'dashboard' | 'projects';
-  onNavigate: (page: 'dashboard' | 'projects') => void;
+  currentPage: 'dashboard' | 'projects' | 'content';
+  onNavigate: (page: 'dashboard' | 'projects' | 'content') => void;
 }
 
 export default function AdminLayout({ children, currentPage, onNavigate }: AdminLayoutProps) {
@@ -19,6 +19,7 @@ export default function AdminLayout({ children, currentPage, onNavigate }: Admin
   const menuItems = [
     { id: 'dashboard' as const, name: 'Dashboard', icon: LayoutDashboard },
     { id: 'projects' as const, name: 'Projetos', icon: FolderOpen },
+    { id: 'content' as const, name: 'Conteúdo', icon: FileText },
   ];
 
   return (
