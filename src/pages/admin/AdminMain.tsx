@@ -6,10 +6,13 @@ import Dashboard from './Dashboard';
 import ProjectsManager from './ProjectsManager';
 import ProjectForm from './ProjectForm';
 import ContentManager from './ContentManager';
+import CustomersManager from './CustomersManager';
+import QuotesManager from './QuotesManager';
+import QuoteForm from './QuoteForm';
 import type { Database } from '../../lib/database.types';
 
 type Project = Database['public']['Tables']['projects']['Row'];
-type AdminPage = 'dashboard' | 'projects' | 'new-project' | 'edit-project' | 'content';
+type AdminPage = 'dashboard' | 'projects' | 'new-project' | 'edit-project' | 'content' | 'customers' | 'quotes' | 'new-quote';
 
 export default function AdminMain() {
   const { user, loading } = useAuth();
@@ -28,7 +31,7 @@ export default function AdminMain() {
     return <Login onLoginSuccess={() => setCurrentPage('dashboard')} />;
   }
 
-  const handleNavigate = (page: 'dashboard' | 'projects' | 'content') => {
+  const handleNavigate = (page: 'dashboard' | 'projects' | 'content' | 'customers' | 'quotes') => {
     setCurrentPage(page);
     setEditingProject(null);
   };
@@ -81,14 +84,22 @@ export default function AdminMain() {
         );
       case 'content':
         return <ContentManager />;
+      case 'customers':
+        return <CustomersManager />;
+      case 'quotes':
+        return <QuotesManager />;
+      case 'new-quote':
+        return <QuoteForm />;
       default:
         return <Dashboard />;
     }
   };
 
-  const getCurrentLayoutPage = (): 'dashboard' | 'projects' | 'content' => {
+  const getCurrentLayoutPage = (): 'dashboard' | 'projects' | 'content' | 'customers' | 'quotes' => {
     if (currentPage === 'dashboard') return 'dashboard';
     if (currentPage === 'content') return 'content';
+    if (currentPage === 'customers') return 'customers';
+    if (currentPage === 'quotes' || currentPage === 'new-quote') return 'quotes';
     return 'projects';
   };
 
