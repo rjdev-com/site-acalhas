@@ -8,6 +8,7 @@ interface PageContent {
 export function usePageContent(pageName: string) {
   const [content, setContent] = useState<PageContent>({});
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     loadContent();
@@ -15,12 +16,18 @@ export function usePageContent(pageName: string) {
 
   const loadContent = async () => {
     try {
-      const { data, error } = await supabase
+      setError(null);
+      const { data, error: queryError } = await supabase
         .from('page_content')
         .select('section_key, content_value')
         .eq('page_name', pageName);
 
-      if (error) throw error;
+      if (queryError) {
+        console.error('Erro ao carregar conteúdo:', queryError);
+        setError(queryError.message);
+        setLoading(false);
+        return;
+      }
 
       const contentMap: PageContent = {};
       data?.forEach(item => {
@@ -28,16 +35,21 @@ export function usePageContent(pageName: string) {
       });
 
       setContent(contentMap);
-    } catch (error) {
-      console.error('Erro ao carregar conteúdo:', error);
+    } catch (err) {
+      console.error('Erro ao carregar conteúdo:', err);
+      setError(err instanceof Error ? err.message : 'Erro desconhecido');
     } finally {
       setLoading(false);
     }
   };
 
   const getContent = (key: string, defaultValue: string = ''): string => {
-    return content[key] || defaultValue;
+    const value = content[key];
+    if (value === null || value === undefined || value === '') {
+      return defaultValue;
+    }
+    return value;
   };
 
-  return { content, loading, getContent };
+  return { content, loading, error, getContent };
 }

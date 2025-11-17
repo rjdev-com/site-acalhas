@@ -65,19 +65,21 @@ export default function Contato() {
     });
   };
 
-  const phone = getContent('phone');
-  const email = getContent('email');
-  const instagramUrl = getContent('instagram_url');
-  const facebookUrl = getContent('facebook_url');
+  const phone = getContent('phone', '(47) 98910-0709');
+  const email = getContent('email', 'contato@acalhas.com.br');
+  const instagramUrl = getContent('instagram_url', 'https://instagram.com/acalhasof');
+  const facebookUrl = getContent('facebook_url', 'https://facebook.com/acalhasof');
 
   return (
     <div>
       <section className="bg-gradient-to-br from-[#1e3a5f] to-[#2d4d70] text-white py-16 md:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">{getContent('hero_title')}</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+              {getContent('hero_title', 'Entre em Contato')}
+            </h1>
             <p className="text-xl text-gray-300 leading-relaxed">
-              {getContent('hero_subtitle')}
+              {getContent('hero_subtitle', 'Estamos prontos para atender você. Solicite um orçamento sem compromisso')}
             </p>
           </div>
         </div>
@@ -88,10 +90,10 @@ export default function Contato() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
             <div>
               <h2 className="text-3xl font-bold text-[#1e3a5f] mb-6">
-                {getContent('info_title')}
+                {getContent('info_title', 'Informações de Contato')}
               </h2>
               <p className="text-gray-700 mb-8 leading-relaxed text-lg">
-                {getContent('info_subtitle')}
+                {getContent('info_subtitle', 'Entre em contato conosco através dos canais abaixo ou preencha o formulário. Responderemos o mais breve possível.')}
               </p>
 
               <div className="space-y-6">
@@ -129,15 +131,21 @@ export default function Contato() {
                     <MapPin size={24} />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-[#1e3a5f] mb-1">{getContent('address_title')}</h3>
-                    <p className="text-gray-600">{getContent('address')}</p>
-                    <p className="text-sm text-gray-500 mt-1">{getContent('address_subtitle')}</p>
+                    <h3 className="font-semibold text-[#1e3a5f] mb-1">
+                      {getContent('address_title', 'Localização')}
+                    </h3>
+                    <p className="text-gray-600">{getContent('address', 'Joinville - SC')}</p>
+                    <p className="text-sm text-gray-500 mt-1">
+                      {getContent('address_subtitle', 'Atendemos Joinville e região')}
+                    </p>
                   </div>
                 </div>
               </div>
 
               <div className="mt-8">
-                <h3 className="font-semibold text-[#1e3a5f] mb-4 text-lg">{getContent('social_title')}</h3>
+                <h3 className="font-semibold text-[#1e3a5f] mb-4 text-lg">
+                  {getContent('social_title', 'Siga-nos nas Redes Sociais')}
+                </h3>
                 <div className="flex space-x-4">
                   <a
                     href={instagramUrl}
@@ -164,7 +172,7 @@ export default function Contato() {
             <div>
               <div className="bg-gray-50 rounded-2xl p-8 shadow-lg">
                 <h2 className="text-2xl font-bold text-[#1e3a5f] mb-6">
-                  {getContent('form_title')}
+                  {getContent('form_title', 'Solicite seu Orçamento')}
                 </h2>
 
                 {success && (
@@ -307,10 +315,10 @@ export default function Contato() {
       <section className="py-16 bg-[#1e3a5f] text-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            {getContent('whatsapp_cta_title')}
+            {getContent('whatsapp_cta_title', 'Prefere Falar Diretamente?')}
           </h2>
           <p className="text-xl text-gray-300 mb-8 leading-relaxed">
-            {getContent('whatsapp_cta_subtitle')}
+            {getContent('whatsapp_cta_subtitle', 'Entre em contato via WhatsApp para um atendimento rápido e personalizado')}
           </p>
           <a
             href={`https://wa.me/55${phone.replace(/\D/g, '')}?text=Olá,%20gostaria%20de%20solicitar%20um%20orçamento`}
