@@ -77,7 +77,7 @@ export default function Inicio({ onNavigate }: InicioProps) {
                 onClick={() => onNavigate('portfolio')}
                 className="inline-flex items-center justify-center bg-white hover:bg-gray-100 text-[#1e3a5f] px-8 py-4 rounded-lg text-lg font-semibold transition-all transform hover:scale-105 shadow-lg"
               >
-                Ver Portfólio
+                Quer Trabalhos Como Esses?
                 <ChevronRight className="ml-2" size={20} />
               </button>
             </div>
