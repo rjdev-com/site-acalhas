@@ -9,10 +9,11 @@ import ContentManager from './ContentManager';
 import CustomersManager from './CustomersManager';
 import QuotesManager from './QuotesManager';
 import QuoteForm from './QuoteForm';
+import SettingsManager from './SettingsManager';
 import type { Database } from '../../lib/database.types';
 
 type Project = Database['public']['Tables']['projects']['Row'];
-type AdminPage = 'dashboard' | 'projects' | 'new-project' | 'edit-project' | 'content' | 'customers' | 'quotes' | 'new-quote';
+type AdminPage = 'dashboard' | 'projects' | 'new-project' | 'edit-project' | 'content' | 'customers' | 'quotes' | 'new-quote' | 'settings';
 
 export default function AdminMain() {
   const { user, loading } = useAuth();
@@ -31,7 +32,7 @@ export default function AdminMain() {
     return <Login onLoginSuccess={() => setCurrentPage('dashboard')} />;
   }
 
-  const handleNavigate = (page: 'dashboard' | 'projects' | 'content' | 'customers' | 'quotes') => {
+  const handleNavigate = (page: 'dashboard' | 'projects' | 'content' | 'customers' | 'quotes' | 'settings') => {
     setCurrentPage(page);
     setEditingProject(null);
   };
@@ -90,16 +91,19 @@ export default function AdminMain() {
         return <QuotesManager />;
       case 'new-quote':
         return <QuoteForm />;
+      case 'settings':
+        return <SettingsManager />;
       default:
         return <Dashboard />;
     }
   };
 
-  const getCurrentLayoutPage = (): 'dashboard' | 'projects' | 'content' | 'customers' | 'quotes' => {
+  const getCurrentLayoutPage = (): 'dashboard' | 'projects' | 'content' | 'customers' | 'quotes' | 'settings' => {
     if (currentPage === 'dashboard') return 'dashboard';
     if (currentPage === 'content') return 'content';
     if (currentPage === 'customers') return 'customers';
     if (currentPage === 'quotes' || currentPage === 'new-quote') return 'quotes';
+    if (currentPage === 'settings') return 'settings';
     return 'projects';
   };
 
