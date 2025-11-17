@@ -35,9 +35,9 @@ export function usePageContent(pageName: string) {
     }
   };
 
-  const get = (key: string, defaultValue: string = ''): string => {
+  const getContent = (key: string, defaultValue: string = ''): string => {
     return content[key] || defaultValue;
   };
 
-  return { content, loading, get };
+  return { content, loading, getContent };
 }
